@@ -1,0 +1,19 @@
+databases:
+  - name: belden-db
+    plan: free
+    databaseName: belden_db
+
+services:
+  - type: web
+    name: belden-api
+    plan: free
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: FRONTEND_URL
+        value: "https://your-app.vercel.app"
