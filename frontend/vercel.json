@@ -1,8 +1,47 @@
 {
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "framework": "vite",
+    "functions": {
+        "api/*.py": {
+            "runtime": "@vercel/python@4.5.0"
+        }
+    },
     "rewrites": [
+        {
+            "source": "/api/operations",
+            "destination": "/api/operations"
+        },
+        {
+            "source": "/api/operations/",
+            "destination": "/api/operations"
+        },
+        {
+            "source": "/api/sustainability",
+            "destination": "/api/sustainability"
+        },
+        {
+            "source": "/api/sustainability/",
+            "destination": "/api/sustainability"
+        },
         {
             "source": "/(.*)",
             "destination": "/index.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, OPTIONS"
+                }
+            ]
         }
     ]
 }
